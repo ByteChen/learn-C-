@@ -4,7 +4,6 @@ template <class T>
 class LinkQueue
 {
 public:
-
 	LinkQueue();
 	~LinkQueue();
 	void EnQueue(const T&);
@@ -41,6 +40,8 @@ template <class T>
 T& LinkQueue<T>::TopQueue()
 {
 	//判断empty
+	if (isEmpty())
+		throw "TopQueue error: the queue is empty!\n";
 	return head->next->data;
 }
 
@@ -54,25 +55,31 @@ template <class T>
 T LinkQueue<T>::DeQueue()
 {
 	if (isEmpty())
-		std::cerr<<"empty"<<endl; //待完善
+		throw "DeQueue error: the queue is empty!\n";
 	else
 	{
-		T temp(head->next->data);
-		ListNode *tempt = head->next;
-		head->next = head->next->next;
-		delete tempt;
-		return temp;
+		ListNode *temp;
+		temp = head->next;
+		if (temp->next == nullptr) //如果这是最后一个节点了，要做特殊处理
+		{
+			head->next = nullptr;
+			rear = head;
+		}
+		else 
+			head->next = temp->next;
+		T val(temp->data);
+		delete temp;
+		return val;
 	}
 }
 
 template <class T>
 LinkQueue<T>::~LinkQueue()
 {
-	while (head != rear)
+	
+	if (head != rear)
 	{
-		ListNode *temp = head;
-		head = head->next;
-		delete temp;
+		DeQueue();
 	}
 	delete head;
 	std::cout << "析构函数被调用" << endl;
