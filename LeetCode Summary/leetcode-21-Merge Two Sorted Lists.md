@@ -14,7 +14,6 @@ Merge two sorted linked lists and return it as a new list.
  */
 class Solution {
 public:
-    /*
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
         if(l1 == NULL) return l2;
         if(l2 == NULL) return l1;
@@ -52,9 +51,8 @@ public:
         if(l2) rear->next = l2;
         return head;
     }
-    */
     
-    /*  //搞个伪根，就不用判断head == NULL了，更简洁
+    //搞个伪根，就不用判断head == NULL了，更简洁
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
         if(l1 == NULL) return l2;
         if(l2 == NULL) return l1;
@@ -79,8 +77,6 @@ public:
         return dummy.next;      //不能dummy->next，因为dummy不是指针，是一个对象
                                 //若想使用->，可以这样：ListNode* head = new ListNode(INT_MIN); rear = head...如下一种方法
     }
-    */
-    
     
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
         if(l1 == NULL) return l2;
