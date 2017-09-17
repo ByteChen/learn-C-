@@ -52,7 +52,7 @@ private:
 * 这是在竞赛时做的，比较直接的方法。题目比较简单，之所以要记下来，是因为需要补充一些字符串的操作。
 * [C++常用字符串分割方法实例汇总](http://www.jb51.net/article/55954.htm)
 1. 一、用strtok函数进行字符串分割（c语言中的）
-```C
+```C++
 原型： char *strtok(char *str, const char *delim);
 功能：分解字符串为一组字符串。
 参数说明：str为要分解的字符串，delim为分隔符字符串。
@@ -79,8 +79,8 @@ private:
 boost中的正则表达式或者split（）等函数，都不错。
 
 4. 最后，在记录一个不错的程序，用来spilt字符串挺不错的，里面用到了substr（）和find（）函数：
-```C+
-#include<iostream>  
+```C++
+#include<iostream>  
 #include <vector>  
 #include<string>  
 using namespace std;  
