@@ -77,4 +77,4 @@ public:
 
 * 也可以使用stringstream对象来完成各种转换，不过重新给stringstream对象赋值时，需要先清空这个流。关于清空stringstream，是有陷阱的，一开始我没有增加 **ss.clear()**这一行，导致程序最终结果没算对。后来加了clear就好了。但是上网查的时候，大家都说stringstream清空应该使用**ss.str("")**这种形式来清空，说clear（）只是清空状态，但是我改成那样之后，没对。 可参考：
 
-*[C++中stringstream类如何清除缓存](http://blog.csdn.net/u012954083/article/details/23483619)
+* [C++中stringstream类如何清除缓存](http://blog.csdn.net/u012954083/article/details/23483619)
