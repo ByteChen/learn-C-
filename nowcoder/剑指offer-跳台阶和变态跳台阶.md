@@ -4,6 +4,10 @@
 ## 分析
 这类题目，比较贴近数学，可以先手动算一算找规律，然后发现这其实是一个**斐波那契数列**的题目，所以使用循环可以很简单地得到答案。不过另外这个题目，也可以使用递归，这样更加简单，但是效率很低。
 
+20171012补充：今天在leetcode再次遇到这道题，发现还有动态规划的方法也不错，故补充一些。
+
+还有其他方法，可参考：[leetcode discuss](https://leetcode.com/problems/climbing-stairs/solution/)
+
 
 ## 代码
 ```C++
@@ -29,6 +33,19 @@ public:
         if(number <= 2)  return number;
         return jumpFloor(number-1) + jumpFloor(number-2);
     }
+    
+     //方法三：动态规划 法: dp[i] = dp[i-1] + dp[i-2],主要是要把前面的结果保存下来，免得后面计算。
+     int jumpFloor(int number) {
+	if( n<= 2) return n;
+        vector<int> dp(n+1);
+        dp[1] = 1;
+        dp[2] = 2;
+        for(int i=3; i<=n; i++)
+        {
+            dp[i] = dp[i-1] + dp[i-2];
+        }
+        return dp[n];
+     }
 };
 ```
 
