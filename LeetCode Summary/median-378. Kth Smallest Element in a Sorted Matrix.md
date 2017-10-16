@@ -33,8 +33,8 @@ public:
             {
                 count += upper_bound(matrix[i].begin(), matrix[i].end(), mid) - matrix[i].begin();
             }
-            if(count<k)
-                left = mid+1;
+            if(count<k) //如果不够数，就加大
+                left = mid+1;
             else
                 right = mid;
         }
