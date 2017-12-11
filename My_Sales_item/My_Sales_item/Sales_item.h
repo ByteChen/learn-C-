@@ -12,6 +12,12 @@ public:
 	
 	friend istream& read(std::istream& is, Sales_item& it);
 	friend ostream& print(ostream& os, const Sales_item &it);
+	friend ostream& operator<<(ostream& os, Sales_item& rhs);
+	friend istream& operator >> (istream& is, Sales_item& rhs);
+	friend Sales_item operator + (const Sales_item& lhs, const Sales_item& rhs);
+	friend void operator += (Sales_item& lhs, const Sales_item& rhs);	//若定义成成员函数，则不必要写lhs。
+	friend bool operator == (const Sales_item& lhs, const Sales_item& rhs);
+	friend bool operator != (const Sales_item& lhs, const Sales_item& rhs) { return !(lhs == rhs); }
 
 	string isbn() const { return bookNo; }
 	Sales_item& combine(const Sales_item lhs);
@@ -40,7 +46,7 @@ istream& read(istream& is, Sales_item& it)
 
 ostream& print(ostream& os, const Sales_item &it)
 {
-	os << "The book is: " << it.bookNo << " " << it.units_sold << " " << it.revenue << endl;
+	os << "The printed book is: " << it.bookNo << " " << it.units_sold << " " << it.revenue << endl;
 	return os;
 }
 
@@ -67,4 +73,53 @@ Sales_item& Sales_item::combine(const Sales_item rhs)
 	else
 		cerr << "Books must be same isbn!\n";
 	return *this;
+}
+
+ostream& operator<<(ostream& os, Sales_item& rhs)
+{
+	os << "The content of this sales item is:" << endl;
+	os << "bookNo: " << rhs.bookNo << endl;
+	os << "units_sold: " << rhs.units_sold << endl;
+	os << "revenue: " << rhs.revenue << endl;
+	return os;
+}
+
+istream& operator >> (istream& is, Sales_item& rhs)
+{
+	is >> rhs.bookNo >> rhs.units_sold >> rhs.revenue;
+	return is;
+}
+
+Sales_item operator + (const Sales_item& lhs, const Sales_item& rhs)
+{
+	if (lhs.bookNo != rhs.bookNo)
+	{
+		cerr << "These books must be same ISBN !" << endl;
+		return Sales_item();
+	}
+	Sales_item ret(lhs);
+	ret.units_sold += rhs.units_sold;
+	ret.revenue += rhs.revenue;
+	return ret;
+}
+
+void operator += (Sales_item& lhs, const Sales_item& rhs)
+{
+	if (lhs.bookNo == rhs.bookNo)
+	{
+		lhs.units_sold += rhs.units_sold;
+		lhs.revenue += rhs.revenue;
+		return;
+	}
+	else
+	{
+		cerr << "operator+= : Books must be in same ISBN!!" << endl;
+	}
+}
+
+inline bool operator == (const Sales_item& lhs, const Sales_item& rhs)
+{
+	return  lhs.bookNo == rhs.bookNo &&
+			lhs.units_sold == rhs.units_sold &&
+			lhs.revenue == rhs.revenue;
 }
