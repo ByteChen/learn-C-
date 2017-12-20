@@ -72,16 +72,62 @@ int bin_search_upper_bound(vector<int> &a, int low, int high, int target)
 	return low;	//认为找不到则返回下一个可插入的位置，若要在找不到时返回-1，则 return low >= a.size() ? -1: low;
 }
 
+
+//五、查找数组中某个数的最小下标，没有返回-1
+int bin_search_find_first(vector<int> &a, int low, int high, int target)
+{
+	int mid;
+	while (low <= high)
+	{
+		mid = low + (high - low) / 2;
+		if (a[mid] >= target)
+			high = mid - 1;
+		else
+			low = mid + 1;
+	}
+	return low;
+}
+
+
+//六、查找数组中某个数的最大下标, 实际上就是在（四）的基础上找到大于target的第一个数的下标，减1即可
+int bin_search_find_last(vector<int> &a, int low, int high, int target)
+{
+	int mid;
+	while (low <= high)
+	{
+		mid = low + (high - low) / 2;
+		if (a[mid] > target)
+			high = mid - 1;
+		else
+			//low = mid + 1;
+			low = mid + 1 ;
+	}
+	return low - 1;
+}
+
+
+//七、统计数组中某个数出现的次数
+int count(vector<int>& a, int target)
+{
+	int low  = bin_search_lower_bound(a, 0, a.size() - 1, target);
+	int high = bin_search_upper_bound(a, 0, a.size() - 1, target);
+	return high - low;
+}
+
 int main()
 {
 	vector<int> a{ 1,2,2,2,4,8,10 };
 	vector<int> b{ 5,2,2,2,4,16,8,10 };
+	vector<int> aa{ 1,2,2,2,4,4,8,10 };
 	
-	cout << "经典二分查找test：" << bin_search(a, 3) << endl;
-	cout << "经典二分查找 递归实现test：" << bin_search_recursive(a, 0, a.size() - 1, 4) << endl;
+	cout << "经典二分查找test：" << bin_search(a, 2) << endl;
+	cout << "经典二分查找 递归实现test：" << bin_search_recursive(a, 0, a.size() - 1, 2) << endl;
 
 	cout << "lower_bound:" << bin_search_lower_bound(a, 0, a.size() - 1, 2) << endl;
 	cout << "upper_bound:" << bin_search_upper_bound(a, 0, a.size() - 1, 2) << endl;
+	cout << "find first :" << bin_search_find_first(a, 0, a.size() - 1, 2) << endl;
+	cout << "find last  :" << bin_search_find_last(a, 0, a.size() - 1, 2) << endl;
+	cout << "count      :" << count(a, 2) << endl;
 
 
 	multiset<int> s(b.begin(), b.end());
