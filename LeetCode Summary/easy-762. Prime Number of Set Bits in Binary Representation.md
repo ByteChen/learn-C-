@@ -123,3 +123,4 @@ public:
 ## 总结
 * 实际上上面三种方法求1个数的原理都是类似的，参考文章:[C/C++：十进制转为二进制（n进制转为十进制）](http://blog.csdn.net/lixiaogang_theanswer/article/details/53471427)
 * 如图 ![10进制转2进制](http://img.blog.csdn.net/20161205223920272)
+* 附一个判断素数的搞笑算法：[判断一个数是否为质数/素数——从普通判断算法到高效判断算法思路](http://blog.csdn.net/huang_miao_xin/article/details/51331710)
