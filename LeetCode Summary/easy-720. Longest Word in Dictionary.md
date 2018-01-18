@@ -26,6 +26,7 @@ Note:
 
 ## 代码
 #### 方法1：使用通用规则排序，对能够找到下属的词语入set
+* 另外，**set.insert() 换成 set.emplace（），效率更高**。可以参考[C++11新特性emplace操作](http://blog.csdn.net/penghuicheng/article/details/51505625)
 ```C++
 string longestWord(vector<string>& words) {
         
@@ -92,7 +93,10 @@ struct strcmp{
     }
 ```
 
-
+## 总结
+1. 使用emplace（）替代insert（）可以提高效率；
+2. 自定义函数对象；
+3. 自定义排序规则，而不是一成不变使用默认规则
 
 
 
