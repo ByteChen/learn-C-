@@ -15,11 +15,13 @@ Note:
 * The number of given pairs will be in the range [1, 1000].
 
 ## 代码
+#### 1.动态规划 Time O(NlogN) 排序； space: O(n)
 ```C++
 class Solution {
 public:
-    static bool mySort(vector<int> &lhs, vector<int>&rhs) {
-        return lhs[0] < rhs[0];
+        //这个函数必须设为static的，才能直接用来做比较函数。 
+    static bool mySort(vector<int> &lhs, vector<int>&rhs) {   
+        return lhs[0] < rhs[0];
     }    
     
     int findLongestChain(vector<vector<int>>& pairs) {
@@ -44,4 +46,39 @@ public:
         return res;
     }
 };
+```
+
+#### 2.贪心算法 Time O(NlogN) 排序； space: O(1) 如果快速排序空间复杂度是O(1)的话
+```C++
+class Solution {
+public:
+    static bool mySort(vector<int> &lhs, vector<int>&rhs) {
+        return lhs[1] < rhs[1];
+    }    
+    
+    int findLongestChain(vector<vector<int>>& pairs) {
+        sort(pairs.begin(), pairs.end(), mySort);
+        
+        int n = pairs.size();
+        vector<int> v(n, 0);
+        int max=1;
+        int res = 0;
+        int cur = pairs[0][1];
+        for(int i=1; i<n; i++) {
+            if(cur < pairs[i][0]) {
+                max ++;
+                cur = pairs[i][1];
+            }
+        }
+        return max;
+    }
+};
+```
+
+## 总结
+* 类中自定义函数用作比较函数时，必须设为**static**的， 不然不能直接用。比如
+```C++
+static bool mySort(vector<int> &lhs, vector<int>&rhs) {
+        return lhs[1] < rhs[1];
+    }    
 ```
