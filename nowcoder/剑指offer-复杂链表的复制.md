@@ -158,7 +158,42 @@ public:
 #### 参考剑指offer书上的方法
 * 时间复杂度 O(n)， 空间复杂度 O(1)，因为不用 map 了。
 ```C++
-
+class Solution {
+public:
+    RandomListNode* Clone(RandomListNode* pHead)
+    {
+        if(pHead == NULL)
+            return NULL;
+        RandomListNode* root = pHead;
+        
+        while(root) {
+            RandomListNode* temp = root->next;
+            root->next = new RandomListNode(root->label);
+            root = root->next->next = temp;
+            //root = temp;
+        }
+        
+        root = pHead;
+        while(root) {
+            if(root->random)
+                root->next->random = root->random->next;
+            root = root->next->next;
+        }
+        
+        root = pHead;
+        RandomListNode* result, *tail;
+        tail = pHead->next;
+        result = pHead->next;
+        root = root->next = tail->next; // neccessary //务必把pHead那一个链表也恢复原样，不然报错
+        while(root) {
+            tail->next = root->next;
+            tail = tail->next;
+            root = root->next = tail->next;
+            //root = tail->next;
+        }
+        return result;
+    }
+};
 ```
 
 
