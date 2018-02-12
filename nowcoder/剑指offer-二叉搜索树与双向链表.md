@@ -53,3 +53,51 @@ public:
 };
 ```
 
+#### 2. 非递归中序遍历的方法
+```C++
+class Solution {
+public:
+    TreeNode* result;
+    TreeNode* Convert(TreeNode* pRootOfTree)
+    {
+        if(pRootOfTree == NULL)
+            return NULL;
+        result = NULL;
+        midTraversal(pRootOfTree);
+        return result;
+    }
+    
+    void midTraversal(TreeNode* root)
+    {
+        stack<TreeNode*> s;
+        TreeNode* lastPtr = NULL;
+        
+        while(!s.empty() || root)
+        {
+            while(root)
+            {
+                s.push(root);
+                root = root->left;
+            }
+            root = s.top();
+            if(lastPtr == NULL)
+            {
+                result = root;
+                lastPtr = root;
+            }
+            else
+            {
+                lastPtr->right = root;
+                root->left = lastPtr;
+                lastPtr = root;
+            }
+            root = root->right;
+            s.pop();
+        }
+    }
+};
+```
+
+## 总结
+* 树的问题，大抵都是要遍历树的，而遍历树，就是要使用各种遍历算法了。还是要温习一下树的非递归遍历算法们。
+
