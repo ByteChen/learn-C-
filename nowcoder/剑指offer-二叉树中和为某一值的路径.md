@@ -3,6 +3,7 @@
 
 ## 代码
 * 每进入下一层，就往path中push一个当前节点值，当要退出这一层，返回上一层时，就弹出这个值，把path恢复原样。
+* 当然path也可以不采用传引用的方式，而是采用传值的方式，这样就不需要在推出当前层是pop_back()了。不过这样效率不高吧。
 ```C++
 /**
  * Definition of TreeNode:
@@ -28,9 +29,9 @@ public:
     vector<vector<int>> binaryTreePathSum(TreeNode * root, int target) {
         res.clear();
         if(root == NULL) return res;
-        vector<int> temp;
+        vector<int> path;
         int sum = 0;
-        getTarget(root, temp, target);
+        getTarget(root, path, target);
         return res;
     }
     
