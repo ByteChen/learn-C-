@@ -54,3 +54,21 @@ public:
     }
 };
 ```
+
+* 20180401 补充递归遍历树的方法，更加简洁
+```C++
+//递归
+    bool HasSubtree(TreeNode* pRoot1, TreeNode* pRoot2)
+    {
+        bool result = false;
+        if(pRoot1 && pRoot2) {
+            if(pRoot1->val == pRoot2->val)
+                result = compare(pRoot1, pRoot2);	////compare()仍然使用上面写的
+            if(!result)					//若没找到。若找到了的话就不再继续往下找了，节省时间
+                result = HasSubtree(pRoot1->left, pRoot2);
+            if(!result)
+                result = HasSubtree(pRoot1->right, pRoot2);
+        }
+        return result;
+    }
+```
