@@ -84,5 +84,18 @@ public:
 };
 ```
 
+## 总结
 * 参考[使用priority_queue建立小顶推](http://blog.csdn.net/trochiluses/article/details/39589879)
 * 参考[优先队列详解priority_queue](https://www.cnblogs.com/Mimick/p/6028654.html)， 这篇文章还包含一些不错的acm题目
+* 关于随机数的产生：rand（）根据时间种子生成随机数，当不改变随机种子时，实际上每次运行都是按照特定的顺序生成相同的伪随机数序列。因为应该每次调用rand()前，使用srand()更新随机种子。而为了让srand()每次产生的随机种子不一样，则它的参数应该不一样。使用time()获得当前时间，因为当前时间总是不一样的，所以srand()每次都能产生不一样的随机种子。
+```C++
+#include<cstdlib>   //rand(), srand()函数
+#include<ctime>     //time()函数，获得当前时间
+    ·
+    ·
+srand(time(0));     //或者 srand(time(NULL))。原型：time_t time (time_t* timer); time（）的参数是一个time_t* 指针，若不为0或者NULL，就会把时间值写到指针所指的内存。
+int a = rand()；     //从而得到一个随机数
+    ·
+    ·
+```
+
